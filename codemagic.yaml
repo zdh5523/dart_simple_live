@@ -13,6 +13,6 @@ workflows:
       - name: Build APK
         script: |
           cd simple_live_app
-          flutter build apk --release
+          flutter build apk --release --android-skip-build-dependency-validation
     artifacts:
       - simple_live_app/build/**/outputs/**/*.apk
