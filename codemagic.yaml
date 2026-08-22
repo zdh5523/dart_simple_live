@@ -6,15 +6,21 @@ workflows:
     environment:
       flutter: stable
     scripts:
-      - name: Prepare dependencies
+      - name: Prepare dependencies and config
         script: |
           cd simple_live_core
           flutter pub get
           cd ../simple_live_app
           flutter pub get
+          # 补充 gradle.properties 和 local.properties 缺失的版本号配置
+          echo "flutter.versionName=1.0.0" >> android/local.properties
+          echo "flutter.versionCode=1" >> android/local.properties
+          echo "flutter.minSdkVersion=21" >> android/local.properties
+          echo "flutter.targetSdkVersion=34" >> android/local.properties
+          echo "flutter.compileSdkVersion=34" >> android/local.properties
       - name: Build APK
         script: |
           cd simple_live_app
-          flutter build apk --release --build-name=1.0.0 --build-number=1 --android-skip-build-dependency-validation
+          flutter build apk --release --android-skip-build-dependency-validation
     artifacts:
       - simple_live_app/build/**/outputs/**/*.apk
