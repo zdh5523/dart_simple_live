@@ -4,7 +4,7 @@ workflows:
     max_build_duration: 30
     instance_type: mac_mini_m1
     environment:
-      flutter: 3.24.0
+      flutter: stable
     scripts:
       - name: Prepare dependencies
         script: |
@@ -17,4 +17,4 @@ workflows:
           cd simple_live_app
           flutter build apk --release --build-name=1.0.0 --build-number=1 --android-skip-build-dependency-validation
     artifacts:
-      - simple_live_app/build/app/outputs/flutter-apk/*.apk
+      - simple_live_app/build/**/outputs/**/*.apk
